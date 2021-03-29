@@ -16,3 +16,39 @@ participant	completion	return
 ["marina", "josipa", "nikola", "vinko", "filipa"]	["josipa", "filipa", "marina", "nikola"]	"vinko"
 ["mislav", "stanko", "mislav", "ana"]	["stanko", "ana", "mislav"]	"mislav"
 */
+
+package main
+
+import (
+	"log"
+)
+
+func solution(participant []string, completion []string) string {
+	log.Println("solution participant:", participant, ", completion:", completion)
+	cp := make([]string, len(participant))
+	copy(cp, participant)
+
+	for _, c := range(completion) {
+		var f int = -1
+		for i, p := range(cp){
+			if(p == c){
+				f = i
+				break;
+			}
+		}
+		if(f >= 0){
+			cp = append(cp[:f], cp[f+1:]...)
+		}
+	}
+	var r string = ""
+	if len(cp) > 0 {
+		r = cp[0]
+	}
+	return r
+}
+
+func main() {
+	log.Println("result -> ", solution([]string{"leo", "kiki", "eden"}, []string{"eden", "kiki"}))
+	log.Println("result -> ", solution([]string{"marina", "josipa", "nikola", "vinko", "filipa"}, []string{"josipa", "filipa", "marina", "nikola"}))
+	log.Println("result -> ", solution([]string{"mislav", "stanko", "mislav", "ana"}, []string{"stanko", "ana", "mislav"}))
+}
