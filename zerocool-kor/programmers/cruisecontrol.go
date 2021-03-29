@@ -25,6 +25,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type ButtonType int
@@ -69,6 +70,7 @@ func calculateCruiseControlSpeed(button ButtonType, currentSpeed int) int {
 }
 
 func main(){
+	rand.Seed(time.Now().UnixNano())
 	currentSpeed := rand.Intn(100 - 10) + 10
 	
 	reader := bufio.NewReader(os.Stdin)
