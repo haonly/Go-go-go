@@ -5,9 +5,9 @@ import (
 func solution(n int) int {
     answer := 0
     
-    var str_n string = strconv.Itoa(n)
-    for i := 0; i < len(str_n); i++ {
-        val, _ := strconv.Atoi(string(str_n[i]))
+    var strN string = strconv.Itoa(n)
+    for i := 0; i < len(strN); i++ {
+        val, _ := strconv.Atoi(string(strN[i]))
         answer += val
     }
 //     for {
