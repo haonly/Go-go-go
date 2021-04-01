@@ -52,7 +52,7 @@ func Drive() {
 		}
 
 		// command -> speed 변경
-		Cruize.CommandToSpeed(&command, &currentSpeed)
+		go Cruize.CommandToSpeed(&command, &currentSpeed)
 	}
 
 }
