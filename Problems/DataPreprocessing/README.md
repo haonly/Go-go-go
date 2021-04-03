@@ -8,7 +8,7 @@
   * dataset 구성 : 아래 11개의 csv
     * 2개는 unclean 데이터라 제외
     * 미리 data dir에 받아놓음. 데이터는 받지 말고 그냥 사용하세요.
-  * dataset 브랜드 (11개) : "audi", "bmw", "cclass", "focus", "ford", "hyundi", "merc", "skoda", "toyota", "vauxhall", "vw"
+  * dataset 브랜드 (9개) : "audi", "bmw", "ford", "hyundi", "merc", "skoda", "toyota", "vauxhall", "vw"
   * column
     * MODEL : car model
     * YEAR : Registration year
