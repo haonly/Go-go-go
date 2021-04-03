@@ -26,7 +26,7 @@
    * (e.g.) audi → price AVG : 10000, mpg AVG : 55.4
    * (e.g.) bmw → price AVG : 12000, mpg AVG : 60.0
 
-2. 전체 브랜드에 대해서, transmission이 Manual, Automatic 인 차량 각각의 mileage, mpg의 평균을 구하세요.
+2. 전체 브랜드에 대해서, transmission이 `Manual`, `Automatic`, `Semi-Auto` 인 차량 각각의 mileage, mpg의 평균을 구하세요.
    * (e.g.) manual의 mileage AVG : 15000, mpg AVG : 55.0
 
 3. 전체 브랜드의 [transmission, fuel type] 조합의 tax 평균을 구하세요.
