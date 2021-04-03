@@ -44,10 +44,11 @@
 
 ```go
 cd DataPreprocessing/preprocess
-go test -bench . -benchmem // 시간, 메모리 사용량, 작업당 할당량 확인
+go test -bench . -benchtime=100x -benchmem // 시간, 메모리 사용량, 작업당 할당량 확인, 100번 실행
 ```
 * solution1,2,3 함수에 대한 benchmark 함수를 만들어놓음.
 * 해당 dir에 들어가서 명령어를 실행시키면, 시간, 메모리 사용량, 할당량을 볼 수 있음.
+* 기존 benchmark 실행횟수가 너무 커서, 100번만 실행시킴.
 
 __[문제 보상] 가장 빠르게 실행한 분에게 스벅 쿠폰 드립니다.__    
 _(물론 컴퓨터마다 성능 차이가 있겠지만...)_
