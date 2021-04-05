@@ -3,20 +3,23 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 
 func calculateCruiseControlSpeed(button string, currentSpeed int) int {
 	fmt.Println("CruiseControl Button pressed: ", button, "Current Speed: ", currentSpeed)
 	val := 0
+	mod := currentSpeed % 10
 	if button == "UPH"{
-		val = 5
+		val = 10 - mod
 	}else if button == "UPS"{
 		val = 1
 	}else if button == "DNH"{
-		val = -5
+		if mod == 0{
+			val = -10
+		} else{
+			val = -1 * mod
+		}
 	}else {
 		val = -1
 	}
@@ -25,8 +28,7 @@ func calculateCruiseControlSpeed(button string, currentSpeed int) int {
 }
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
-	currentSpeed := 10 + rand.Intn(120-10)
+	currentSpeed := 88
 	var holdType int
 	typeMap := map[int]string{
 		1: "UPH",
