@@ -1,9 +1,14 @@
 package main
 
-import "test/DataPreprocessing/preprocess"
+import "MiniProject/DataPreprocessing/preprocess"
 
 func main() {
-	// preprocess.Preprocess()
-	preprocess.Solution1()
-	return
+	preprocess.Solution1Origin()
+	preprocess.Solution1GoRoutine()
+
+	preprocess.Solution2Origin()
+	preprocess.Solution2GoRoutine()
+
+	preprocess.Solution2GoRoutine()
+	preprocess.Solution3GoRoutine()
 }

@@ -2,20 +2,37 @@ package preprocess
 
 import "testing"
 
-func BenchmarkSolution1(b *testing.B) {
+func BenchmarkSolution1Origin(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		solution1()
+		Solution1Origin()
 	}
 }
 
-func BenchmarkSolution2(b *testing.B) {
+func BenchmarkSolution1GoRoutine(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		solution2()
+		Solution1GoRoutine()
 	}
 }
 
-func BenchmarkSolution3(b *testing.B) {
+func BenchmarkSolution2Origin(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		solution3()
+		Solution2Origin()
+	}
+}
+
+func BenchmarkSolution2GoRoutine(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Solution2GoRoutine()
+	}
+}
+
+func BenchmarkSolution3Origin(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Solution3Origin()
+	}
+}
+func BenchmarkSolution3GoRoutine(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Solution3GoRoutine()
 	}
 }
