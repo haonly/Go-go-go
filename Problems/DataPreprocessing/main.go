@@ -1,10 +1,10 @@
 package main
 
 import (
-	"test/DataPreprocessing/preprocess"
+	"./preprocess"
 )
 
 func main() {
-	preprocess.Preprocess()
-	return
+	var brandNames = []string{"audi", "bmw", "ford", "hyundi", "merc", "skoda", "toyota", "vauxhall", "vw"}
+	preprocess.Preprocess(brandNames)
 }
