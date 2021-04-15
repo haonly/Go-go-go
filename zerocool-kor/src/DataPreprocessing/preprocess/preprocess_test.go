@@ -8,6 +8,12 @@ func BenchmarkSolution1(b *testing.B) {
 	}
 }
 
+func BenchmarkSolution1Goroutine(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		solution1_goroutine()
+	}
+}
+
 func BenchmarkSolution2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		solution2()

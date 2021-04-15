@@ -1,7 +1,7 @@
 package main
 
 import (
-	"test/DataPreprocessing/preprocess"
+	"DataPreprocessing/preprocess"
 )
 
 func main() {
