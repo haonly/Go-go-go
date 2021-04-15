@@ -4,8 +4,9 @@ import "testing"
 
 func BenchmarkSolution1(b *testing.B) {
 	var brandNames = []string{"audi", "bmw", "ford", "hyundi", "merc", "skoda", "toyota", "vauxhall", "vw"}
+	const desiredNumTask = 10
 	for i := 0; i < b.N; i++ {
-		solution1(brandNames)
+		solution1(brandNames, desiredNumTask)
 	}
 }
 
