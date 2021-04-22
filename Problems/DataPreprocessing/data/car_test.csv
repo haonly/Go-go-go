@@ -1,0 +1,22 @@
+model,year,price,transmission,mileage,fuelType,tax,mpg,engineSize
+ T-Roc,2019,25000,Automatic,13904,Diesel,145,49.6,2
+ T-Roc,2019,26883,Automatic,4562,Diesel,145,49.6,2
+ T-Roc,2019,20000,Manual,7414,Diesel,145,50.4,2
+ T-Roc,2019,33492,Automatic,4825,Petrol,145,32.5,2
+ T-Roc,2019,22900,Semi-Auto,6500,Petrol,150,39.8,1.5
+ T-Roc,2020,31895,Manual,10,Petrol,145,42.2,1.5
+ T-Roc,2020,27895,Manual,10,Petrol,145,42.2,1.5
+ T-Roc,2020,39495,Semi-Auto,10,Petrol,145,32.5,2
+ T-Roc,2019,21995,Manual,10,Petrol,145,44.1,1
+ T-Roc,2019,23285,Manual,10,Petrol,145,42.2,1.5
+ T-Roc,2019,23985,Semi-Auto,10,Petrol,145,39.8,1.5
+ T-Roc,2019,23585,Manual,10,Petrol,145,42.2,1.5
+ T-Roc,2020,25785,Semi-Auto,10,Petrol,145,39.8,1.5
+ T-Roc,2019,23995,Semi-Auto,1069,Petrol,145,39.8,1.5
+ T-Roc,2018,17495,Manual,21645,Petrol,145,53.3,1.5
+ T-Roc,2018,21495,Manual,16972,Petrol,145,53.3,1.5
+ T-Roc,2018,18995,Manual,15100,Petrol,145,44.1,1
+ T-Roc,2018,18995,Manual,1380,Petrol,150,55.4,1
+ T-Roc,2019,33785,Semi-Auto,2500,Petrol,145,32.5,2
+ T-Roc,2020,23790,Semi-Auto,5000,Petrol,145,39.8,1.5
+ T-Roc,2019,19995,Manual,12300,Petrol,145,42.2,1.5
