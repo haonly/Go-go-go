@@ -1,0 +1,16 @@
+### Create
+POST localhost:8888/vin
+Content-Type: application/json
+
+{
+  "vin": "1"
+}
+
+### Get
+GET localhost:8888/vin/1
+
+### Delete
+DELETE localhost:8888/vin/1
+
+### Get Not found
+GET localhost:8888/vin/1

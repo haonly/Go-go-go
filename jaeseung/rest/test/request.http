@@ -1,0 +1,9 @@
+GET http://localhost:8888/
+
+POST http://localhost:8888/vin
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
