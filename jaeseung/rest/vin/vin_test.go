@@ -3,6 +3,7 @@ package vin
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/memory"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"io"
@@ -26,7 +27,7 @@ type VinTestSuite struct {
 
 func (s *VinTestSuite) SetupTest() {
 	logger := log.New(os.Stdout, "[motor] ", log.LstdFlags|log.Lshortfile)
-	repo := NewMemRepository()
+	repo := memory.New()
 	s.cut = New(logger, repo)
 }
 
