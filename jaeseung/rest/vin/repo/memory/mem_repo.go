@@ -1,4 +1,4 @@
-package vin
+package memory
 
 import "errors"
 
@@ -6,7 +6,7 @@ type MemRepository struct {
 	repo map[string]string
 }
 
-func NewMemRepository() *MemRepository {
+func New() *MemRepository {
 	m := make(map[string]string)
 	return &MemRepository{repo: m}
 }
