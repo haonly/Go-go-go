@@ -12,10 +12,10 @@ import (
 
 type Handler struct {
 	log  *log.Logger
-	repo *MemRepository
+	repo VinRepository
 }
 
-func New(l *log.Logger, repo *MemRepository) *Handler {
+func New(l *log.Logger, repo VinRepository) *Handler {
 	return &Handler{
 		log:  l,
 		repo: repo,
@@ -48,6 +48,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	newVID := cReq.VIN + cReq.VIN
 	if _, err := h.repo.Save(cReq.VIN, newVID); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -80,6 +81,7 @@ func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	vid, err := h.repo.Get(vin)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -118,6 +120,7 @@ func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	vid, err := h.repo.Delete(vin)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
