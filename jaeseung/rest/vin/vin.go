@@ -146,7 +146,7 @@ func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) handleError(w http.ResponseWriter, statusCode int, err error) {
 	errRes := ResponseError{http.StatusText(statusCode), []string{err.Error()}}
-	h.log.Printf("err=%s", err.Error)
+	h.log.Printf("err=%s", err.Error())
 	h.writeJSONResponse(w, statusCode, errRes)
 }
 
