@@ -2,14 +2,15 @@ package config
 
 import (
 	"database/sql"
-	 _ "github.com/go-sql-driver/mysql"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
-func GetDB() (db *sql.DB, err error){
+func GetDB() (db *sql.DB, err error) {
 	dbDriver := "mysql"
 	dbUser := "root"
-	dbPassword := "ha159631"
+	dbPassword := "123qweasdzxc"
 	dbName := "go_api"
-	db, err = sql.Open(dbDriver, dbUser + ":" + dbPassword + "@/" + dbName)
+	db, err = sql.Open(dbDriver, dbUser+":"+dbPassword+"@/"+dbName)
 	return
 }

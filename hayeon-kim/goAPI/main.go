@@ -1,9 +1,9 @@
 package main
 
 import (
+	"Go-go-go/hayeon-kim/goAPI/apis/vehicle"
 	"fmt"
 	"github.com/gorilla/mux"
-	"goAPI/apis/vehicle"
 	"net/http"
 )
 
@@ -15,10 +15,8 @@ func main() {
 	router.HandleFunc("/api/vehicle/vin", vehicle.Create).Methods("POST")
 	router.HandleFunc("/api/vehicle/vin", vehicle.Delete).Methods("DELETE")
 
-
 	err := http.ListenAndServe(":5000", router)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
-
