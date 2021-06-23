@@ -15,6 +15,7 @@ func (m *MemRepository) Save(vin string, vid string) (string, error) {
 	m.repo[vin] = vid
 	return vid, nil
 }
+
 func (m *MemRepository) Get(vin string) (string, error) {
 	vid, ok := m.repo[vin]
 	if !ok {
@@ -22,6 +23,20 @@ func (m *MemRepository) Get(vin string) (string, error) {
 	}
 	return vid, nil
 }
+
+func (m *MemRepository) Update(vin string, vid string) error {
+	_, err := m.Get(vin)
+	if err != nil {
+		return err
+	}
+
+	_, err = m.Save(vin, vid)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *MemRepository) Delete(vin string) (string, error) {
 	vid, ok := m.repo[vin]
 	if !ok {

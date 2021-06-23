@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"os"
 	"strings"
 	"testing"
 )
@@ -26,9 +25,8 @@ type VinTestSuite struct {
 }
 
 func (s *VinTestSuite) SetupTest() {
-	logger := log.New(os.Stdout, "[motor] ", log.LstdFlags|log.Lshortfile)
 	repo := memory.New()
-	s.cut = New(logger, repo)
+	s.cut = New(repo)
 }
 
 func (s *VinTestSuite) TearDownTest() {
