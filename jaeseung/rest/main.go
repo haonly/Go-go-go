@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/haonly/Go-go-go/jaeseung/rest/config"
 	"github.com/haonly/Go-go-go/jaeseung/rest/home"
 	"github.com/haonly/Go-go-go/jaeseung/rest/server"
 	vin "github.com/haonly/Go-go-go/jaeseung/rest/vin"
@@ -11,28 +12,18 @@ import (
 	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/memory"
 	log "github.com/sirupsen/logrus"
 	"os"
-	"strconv"
 )
 
 var (
-	portNum  *int
-	repoType *string
 	logLevel *string
 )
 
 func init() {
-	portNum = flag.Int("port", 8888, "Server port")
-	repoType = flag.String("repoType", "memory", "DB type(memory, mariaDB)")
 	logLevel = flag.String("logLevel", "debug", "DB type(debug, info, warn)")
 	flag.Parse()
-	// Log as JSON instead of the default ASCII formatter.
 	log.SetFormatter(&log.JSONFormatter{})
-
-	// Output to stdout instead of the default stderr
-	// Can be any io.Writer, see below for File example
 	log.SetOutput(os.Stdout)
 
-	// Only log the warning severity or above.
 	switch *logLevel {
 	case "info":
 		log.Warn("log level=InfoLevel")
@@ -50,31 +41,32 @@ func init() {
 }
 
 func main() {
-	mux := mux.NewRouter()
-	// / Home
-	h := home.New()
-	h.SetupRoutes(mux)
+	cfg := config.New()
 
-	// /vin
-	repo, err := loadRepository(*repoType)
+	repo, err := loadRepository(cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	mux := mux.NewRouter()
+	h := home.New()
+	h.SetupRoutes(mux)
+
 	v := vin.New(repo)
 	v.SetupRoutes(mux)
 
-	srv := server.New(mux, ":"+strconv.Itoa(*portNum))
+	srv := server.New(cfg, mux)
 	if err := srv.ListenAndServe(); err != nil {
 		log.Fatalf("Server can't start %v", err)
 	}
 }
 
-func loadRepository(repoType string) (vin.VinRepository, error) {
-	if repoType == "memory" {
+func loadRepository(c *config.Config) (vin.VinRepository, error) {
+	if c.RepositoryType == "memory" {
 		return memory.New(), nil
 	}
-	if repoType == "mariaDB" {
-		return mariadb.New(), nil
+	if c.RepositoryType == "mariaDB" {
+		return mariadb.New(c), nil
 	}
-	return nil, fmt.Errorf("Unknown repository type repoType=%s", repoType)
+	return nil, fmt.Errorf("Unknown repository type repoType=%s", c.RepositoryType)
 }

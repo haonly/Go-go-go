@@ -7,6 +7,14 @@ import (
 	"log"
 )
 
+type Config interface {
+	DBAddress() string
+	DBPort() int
+	DBName() string
+	DBUser() string
+	DBPassword() string
+}
+
 type MariaDBRepository struct {
 	db *gorm.DB
 }
@@ -16,8 +24,15 @@ type VIN struct {
 	Vid string
 }
 
-func New() *MariaDBRepository {
-	dsn := "root:1234@tcp(127.0.0.1:3306)/mydb?charset=utf8mb4&parseTime=True&loc=Local"
+func New(c Config) *MariaDBRepository {
+	//dsn := "root:1234@tcp(127.0.0.1:3306)/mydb?charset=utf8mb4&parseTime=True&loc=Local"
+	//dsn := ""
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		c.DBUser(),
+		c.DBPassword(),
+		c.DBAddress(),
+		c.DBPort(),
+		c.DBName())
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
