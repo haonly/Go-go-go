@@ -2,18 +2,18 @@ package home
 
 import (
 	"github.com/gorilla/mux"
-	"log"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"time"
 )
 
 type Handlers struct {
-	l *log.Logger
+	l *logrus.Entry
 }
 
-func New(l *log.Logger) *Handlers {
+func New() *Handlers {
 	return &Handlers{
-		l: l,
+		l: logrus.WithFields(logrus.Fields{"tag": "home"}),
 	}
 }
 
