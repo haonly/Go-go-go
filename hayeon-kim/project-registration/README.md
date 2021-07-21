@@ -7,20 +7,20 @@
 - 차량 table(차 주인 회원, 차 정보(차종, 연식 등등), isReserved, …)
 	- 차 정보는 차 최종 등록 시 입력
 	- isReserved는 bool 값 -> true: 못빌림, false: 빌릴 수 있음
-		○ True일 때 reserved된  startAt(timestamp), endAt(timestamp) 값이 있음
+		- True일 때 reserved된  startAt(timestamp), endAt(timestamp) 값이 있음
 - <b>스키마</b>
 	- Registration
-		○ registrationID - uuid
-		○ ownerID - uuid (회원관리서비스와 협의 필요해보임..)
-		○ vehicleID - uuid
+		- registrationID - uuid
+		- ownerID - uuid (회원관리서비스와 협의 필요해보임..)
+		- vehicleID - uuid
 	- Vehicle
-		○ vehicleID - uuid
-		○ ownerID - uuid
-		○ model - string (차종)
-		○ type - string (hev, ev, engine)
-		○ year - int (몇년도 양산)
-		○ capacity - int (cc)
-		○ isReserved - boolean
-		○ reservingUser - uuid 
-		○ startAt - timestamp
-		○ endAt - timestamp
+		- vehicleID - uuid
+		- ownerID - uuid
+		- model - string (차종)
+		- type - string (hev, ev, engine)
+		- year - int (몇년도 양산)
+		- capacity - int (cc)
+		- isReserved - boolean
+		- reservingUser - uuid 
+		- startAt - timestamp
+		- endAt - timestamp
