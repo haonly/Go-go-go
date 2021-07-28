@@ -1,8 +1,9 @@
 package mariadb
 
 import (
+	"context"
 	"fmt"
-	"gorm.io/driver/mysql"
+	mysql "go.elastic.co/apm/module/apmgormv2/driver/mysql"
 	"gorm.io/gorm"
 	"log"
 )
@@ -27,7 +28,7 @@ type VIN struct {
 func New(c Config) *MariaDBRepository {
 	//dsn := "root:1234@tcp(127.0.0.1:3306)/mydb?charset=utf8mb4&parseTime=True&loc=Local"
 	//dsn := ""
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		c.DBUser(),
 		c.DBPassword(),
 		c.DBAddress(),
@@ -43,7 +44,8 @@ func New(c Config) *MariaDBRepository {
 	return &MariaDBRepository{db: db}
 }
 
-func (m *MariaDBRepository) Save(vin string, vid string) (string, error) {
+func (m *MariaDBRepository) Save(ctx context.Context, vin string, vid string) (string, error) {
+	m.db = m.db.WithContext(ctx)
 	v := VIN{vin, vid}
 	result := m.db.Create(&v) // pass pointer of data to Create
 
@@ -53,7 +55,8 @@ func (m *MariaDBRepository) Save(vin string, vid string) (string, error) {
 	return v.Vid, nil
 }
 
-func (m *MariaDBRepository) Get(vin string) (vid string, e error) {
+func (m *MariaDBRepository) Get(ctx context.Context, vin string) (vid string, e error) {
+	m.db = m.db.WithContext(ctx)
 	v := &VIN{}
 	err := m.db.Where("vin=?", vin).First(v).Error
 	if err != nil {
@@ -62,7 +65,8 @@ func (m *MariaDBRepository) Get(vin string) (vid string, e error) {
 	return v.Vid, nil
 }
 
-func (m *MariaDBRepository) Update(vin string, vid string) error {
+func (m *MariaDBRepository) Update(ctx context.Context, vin string, vid string) error {
+	m.db = m.db.WithContext(ctx)
 	v := &VIN{Vid: vid}
 	err := m.db.Update("vid", v).Where("vin=?", vin).Error
 	if err != nil {
@@ -71,9 +75,10 @@ func (m *MariaDBRepository) Update(vin string, vid string) error {
 	return nil
 }
 
-func (m *MariaDBRepository) Delete(vin string) (string, error) {
+func (m *MariaDBRepository) Delete(ctx context.Context, vin string) (string, error) {
+	m.db = m.db.WithContext(ctx)
 	v := VIN{Vin: vin}
-	vid, err := m.Get(vin)
+	vid, err := m.Get(ctx, vin)
 	if err != nil {
 		return "", err
 	}

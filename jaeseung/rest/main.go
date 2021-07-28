@@ -11,6 +11,9 @@ import (
 	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/mariadb"
 	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/memory"
 	log "github.com/sirupsen/logrus"
+	"go.elastic.co/apm/module/apmgorilla"
+	"go.elastic.co/apm/module/apmlogrus"
+	"go.elastic.co/ecslogrus"
 	"os"
 )
 
@@ -21,7 +24,12 @@ var (
 func init() {
 	logLevel = flag.String("logLevel", "debug", "DB type(debug, info, warn)")
 	flag.Parse()
-	log.SetFormatter(&log.JSONFormatter{})
+	log.SetFormatter(&ecslogrus.Formatter{
+		DataKey: "labels", // For ECS compliance
+	})
+	log.SetReportCaller(true)
+	log.AddHook(&apmlogrus.Hook{})
+
 	log.SetOutput(os.Stdout)
 
 	switch *logLevel {
@@ -38,6 +46,8 @@ func init() {
 		log.Warn("log level set to default=DebugLevel")
 		log.SetLevel(log.DebugLevel)
 	}
+	os.Setenv("ELASTIC_APM_SERVER_URL", "0.0.0.0:8201")
+	os.Setenv("RepositoryType", "mariaDB")
 }
 
 func main() {
@@ -49,6 +59,7 @@ func main() {
 	}
 
 	mux := mux.NewRouter()
+	apmgorilla.Instrument(mux)
 	h := home.New()
 	h.SetupRoutes(mux)
 
@@ -56,9 +67,11 @@ func main() {
 	v.SetupRoutes(mux)
 
 	srv := server.New(cfg, mux)
+	log.Info("Before Server has started")
 	if err := srv.ListenAndServe(); err != nil {
 		log.Fatalf("Server can't start %v", err)
 	}
+	log.Info("Server has started")
 }
 
 func loadRepository(c *config.Config) (vin.VinRepository, error) {

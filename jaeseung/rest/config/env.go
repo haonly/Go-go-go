@@ -26,7 +26,7 @@ func (c Config) ServerAddress() string {
 }
 
 func (c Config) ServerPort() int {
-	return c.CfgDBPort
+	return c.CfgServerPort
 }
 
 type MariaDB struct {

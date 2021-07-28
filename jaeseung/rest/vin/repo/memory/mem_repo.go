@@ -1,6 +1,9 @@
 package memory
 
-import "errors"
+import (
+	"context"
+	"errors"
+)
 
 type MemRepository struct {
 	repo map[string]string
@@ -11,12 +14,12 @@ func New() *MemRepository {
 	return &MemRepository{repo: m}
 }
 
-func (m *MemRepository) Save(vin string, vid string) (string, error) {
+func (m *MemRepository) Save(ctx context.Context, vin string, vid string) (string, error) {
 	m.repo[vin] = vid
 	return vid, nil
 }
 
-func (m *MemRepository) Get(vin string) (string, error) {
+func (m *MemRepository) Get(ctx context.Context, vin string) (string, error) {
 	vid, ok := m.repo[vin]
 	if !ok {
 		return "", errors.New("Not Found")
@@ -24,20 +27,20 @@ func (m *MemRepository) Get(vin string) (string, error) {
 	return vid, nil
 }
 
-func (m *MemRepository) Update(vin string, vid string) error {
-	_, err := m.Get(vin)
+func (m *MemRepository) Update(ctx context.Context, vin string, vid string) error {
+	_, err := m.Get(ctx, vin)
 	if err != nil {
 		return err
 	}
 
-	_, err = m.Save(vin, vid)
+	_, err = m.Save(ctx, vin, vid)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (m *MemRepository) Delete(vin string) (string, error) {
+func (m *MemRepository) Delete(ctx context.Context, vin string) (string, error) {
 	vid, ok := m.repo[vin]
 	if !ok {
 		return "", errors.New("Not Found")
