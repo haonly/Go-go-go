@@ -3,12 +3,15 @@ package models
 import (
 	"Go-go-go/hayeon-kim/goAPI/entities"
 	"database/sql"
-	"fmt"
 	"hash/fnv"
 )
 
 type VehicleModel struct {
 	DB *sql.DB
+}
+
+func queryMaker() {
+
 }
 
 func (vehicleModel VehicleModel) FindAll() (vehicle []entities.Vehicle, error error) {
@@ -23,7 +26,6 @@ func (vehicleModel VehicleModel) Search(keyword string) (vehicle []entities.Vehi
 
 func (vehicleModel VehicleModel) Create(getVehicle *entities.ModifyVehicle) (error error) {
 	VID := hash(getVehicle.VIN)
-	fmt.Println("VIN, VID: "+getVehicle.VIN, VID)
 	result, err := vehicleModel.DB.Exec("insert into vehicle (VIN, VID, create_time, modify_time) values (?, ?, now(), now());", getVehicle.VIN, VID)
 	if err != nil {
 		return err

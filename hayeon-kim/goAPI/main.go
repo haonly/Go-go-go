@@ -9,7 +9,6 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-
 	router.HandleFunc("/api/vehicle/all/findall", vehicle.FindAll).Methods("GET")
 	router.HandleFunc("/api/vehicle/{keyword}", vehicle.Search).Methods("GET")
 	router.HandleFunc("/api/vehicle/vin", vehicle.Create).Methods("POST")
