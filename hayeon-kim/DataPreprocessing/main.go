@@ -1,7 +1,7 @@
 package main
 
 import (
-	"test/DataPreprocessing/preprocess"
+	"github.com/haonly/Go-go-go/hayeon-kim/DataPreprocessing/preprocess"
 )
 
 func main() {

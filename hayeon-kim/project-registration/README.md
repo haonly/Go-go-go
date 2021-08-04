@@ -9,13 +9,17 @@
     - isReserved는 bool 값 -> true: 못빌림, false: 빌릴 수 있음
         - True일 때 reserved된  startAt(timestamp), endAt(timestamp) 값이 있음
 - <b>스키마</b>
-    - Registration
+    - map_service_vin
+      - vehicleID
+      - serviceID
+      - VIN
+    - Registration: map_registration
         - registrationID - uuid
-        - ownerID - uuid (회원관리서비스와 협의 필요해보임..)
+        - masterUserID - uuid (회원관리서비스와 협의 필요해보임..)
         - vehicleID - uuid
-    - Vehicle
+    - Vehicle - info_vehicle
         - vehicleID - uuid
-        - ownerID - uuid
+        - masterUserID - uuid
         - model - string (차종)
         - type - string (hev, ev, engine)
         - year - int (몇년도 양산)
@@ -33,3 +37,15 @@
       3. VIN: String
       4. 차량정보(schema에 다른 json)
       5. create_time: timestamp(UNIX Epoch seconds 참고,,)
+
+### DB
+```sql
++--------------------------------+
+| Tables_in_vehicle_registration |
++--------------------------------+
+| info_vehicle                   |
+| map_registration_vehicle       |
++--------------------------------+
+```
+- 테이블 생성 완료
+- 테이블 스키마에 맞는 API 호출 코드 구현
