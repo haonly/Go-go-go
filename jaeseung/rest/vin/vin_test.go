@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"os"
 	"strings"
 	"testing"
 )
@@ -26,9 +25,8 @@ type VinTestSuite struct {
 }
 
 func (s *VinTestSuite) SetupTest() {
-	logger := log.New(os.Stdout, "[motor] ", log.LstdFlags|log.Lshortfile)
 	repo := memory.New()
-	s.cut = New(logger, repo)
+	s.cut = New(repo)
 }
 
 func (s *VinTestSuite) TearDownTest() {
@@ -58,7 +56,7 @@ func (s *VinTestSuite) Test_Create() {
 	}
 	buf := bytes.NewBuffer(reqBody)
 	req := httptest.NewRequest(http.MethodPost, "/", buf)
-	req.Header.Set("Content-Type", "text/json; charset=utf-8")
+	req.Header.Set("Content-Type", "application/json")
 	w := httptest.NewRecorder()
 
 	// Exercise
@@ -68,7 +66,7 @@ func (s *VinTestSuite) Test_Create() {
 
 	// Verify
 	assert.Equal(s.T(), http.StatusOK, actual.StatusCode)
-	assert.Equal(s.T(), "text/json; charset=utf-8", actual.Header.Get("Content-Type"))
+	assert.Equal(s.T(), "application/json", actual.Header.Get("Content-Type"))
 
 	var expected CreateResponse
 	if err := json.Unmarshal(body, &expected); err != nil {
@@ -109,7 +107,7 @@ func (s *VinTestSuite) helperCreateVID() {
 
 	// Verify
 	assert.Equal(s.T(), http.StatusOK, actual.StatusCode)
-	assert.Equal(s.T(), "text/json; charset=utf-8", actual.Header.Get("Content-Type"))
+	assert.Equal(s.T(), "application/json", actual.Header.Get("Content-Type"))
 }
 
 func (s *VinTestSuite) Test_Get() {

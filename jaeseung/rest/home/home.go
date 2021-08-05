@@ -2,18 +2,18 @@ package home
 
 import (
 	"github.com/gorilla/mux"
-	"log"
+	"github.com/haonly/Go-go-go/jaeseung/rest/middle"
+	"github.com/sirupsen/logrus"
 	"net/http"
-	"time"
 )
 
 type Handlers struct {
-	l *log.Logger
+	l *logrus.Entry
 }
 
-func New(l *log.Logger) *Handlers {
+func New() *Handlers {
 	return &Handlers{
-		l: l,
+		l: logrus.WithFields(logrus.Fields{"tag": "home"}),
 	}
 }
 
@@ -26,13 +26,5 @@ func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) SetupRoutes(m *mux.Router) {
-	m.HandleFunc("/", h.ReqLatencyMiddleware(h.Home))
-}
-
-func (h Handlers) ReqLatencyMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		s := time.Now()
-		defer h.l.Printf("[mid] req processed for %v\n", time.Now().Sub(s))
-		next(w, r)
-	}
+	m.HandleFunc("/", middle.LatencyPrint(h.Home))
 }

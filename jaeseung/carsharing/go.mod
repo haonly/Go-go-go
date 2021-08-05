@@ -1,10 +1,11 @@
-module github.com/haonly/Go-go-go/jaeseung/rest
+module github.com/haonly/Go-go-go/jaeseung/carsharing
 
 go 1.16
 
 require (
 	github.com/elastic/go-sysinfo v1.7.0 // indirect
 	github.com/elastic/go-windows v1.0.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/mux v1.8.0
 	github.com/jinzhu/configor v1.2.1
 	github.com/pkg/errors v0.9.1 // indirect

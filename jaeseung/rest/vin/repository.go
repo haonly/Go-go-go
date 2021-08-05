@@ -1,7 +1,10 @@
 package vin
 
+import "context"
+
 type VinRepository interface {
-	Save(vin string, vid string) (string, error)
-	Get(vin string) (string, error)
-	Delete(vin string) (string, error)
+	Save(ctx context.Context, vin string, vid string) (string, error)
+	Get(ctx context.Context, vin string) (string, error)
+	Update(ctx context.Context, vin string, vid string) error
+	Delete(ctx context.Context, vin string) (string, error)
 }
