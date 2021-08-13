@@ -3,7 +3,7 @@ POST localhost:8888/vin
 Content-Type: application/json
 
 {
-  "vin": "1"
+  "vin": "2"
 }
 
 ### Get

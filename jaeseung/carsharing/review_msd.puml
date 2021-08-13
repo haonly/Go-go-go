@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+사용자_대여자 -> Review: 리뷰 생성 요청
+Review --> 사용자_대여자: 성공 유무
+
+newpage
+사용자_Host -> Review: 리뷰 생성 요청
+Review --> 사용자_Host: 성공 유무
+
+newpage
+사용자_Bot -> Review: Host 취소건 리뷰 생성 요청
+Review --> 사용자_Bot: 성공 유무
+
+newpage
+Review -> 차량: 차량 리뷰 Rating 결과 전달
+차량 <-- Review: 성공 유무
+
+newpage
+Review ->> 사용자_대여자: 사용자_대여자 리뷰 Rating 결과 전달
+Review ->> 사용자_Host: 사용자_Host 리뷰 Rating 결과 전달
+Review ->> 차량: 차량 리뷰 Rating 결과 전달
+@enduml

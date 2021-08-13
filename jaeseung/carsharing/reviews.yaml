@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: (작업중)Review service
+  description: Review service
+  version: 0.1.0
+servers:
+  - url: 'https://127.0.0.1:8888'
+paths:
+  /reviews:
+    post:
+      requestBody:
+        description: Review's contents
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PostReview'
+      responses:
+        '200':
+          description: Review successfully created
+    get:
+      responses:
+        200:
+          $ref: "#/components/schemas/GetReview"
+        400:
+          description: "Not found"
+components:
+  schemas:
+    PostReview:
+      properties:
+        creator_id:
+          description: Creator of the review
+          type: string
+          required: true
+        review_target_id:
+          description: ID of target of reivew
+          type: string
+          required: true
+        rating:
+          description: Rating point
+          type: number
+        text:
+          description: Review text
+          type: string
+    GetReview:
+      properties:
+        id:
+          description: Updated name of the pet
+          type: string
+        create_epoch:
+          description: UNIX Epoch seconds which at the time of creation
+          type: integer
+        creator_id:
+          description: Creator of the review
+          type: string
+        review_target_id:
+          description: ID of target of reivew
+          type: string
+        rating:
+          description: Rating point
+          type: number
+        text:
+          description: Review text
+          type: string

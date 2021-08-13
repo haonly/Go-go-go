@@ -4,12 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/haonly/Go-go-go/jaeseung/rest/config"
-	"github.com/haonly/Go-go-go/jaeseung/rest/home"
-	"github.com/haonly/Go-go-go/jaeseung/rest/server"
-	vin "github.com/haonly/Go-go-go/jaeseung/rest/vin"
-	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/mariadb"
-	"github.com/haonly/Go-go-go/jaeseung/rest/vin/repo/memory"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/config"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/review/controller"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/review/entity/repo"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/review/entity/repo/memory"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/review/usecase"
+	"github.com/haonly/Go-go-go/jaeseung/carsharing/server"
 	log "github.com/sirupsen/logrus"
 	"go.elastic.co/apm/module/apmgorilla"
 	"go.elastic.co/apm/module/apmlogrus"
@@ -60,11 +60,10 @@ func main() {
 
 	mux := mux.NewRouter()
 	apmgorilla.Instrument(mux)
-	h := home.New()
-	h.SetupRoutes(mux)
 
-	v := vin.New(repo)
-	v.SetupRoutes(mux)
+	uc := usecase.NewReview(repo)
+	ctrl := controller.NewReview(uc)
+	ctrl.SetupRoutes(mux)
 
 	srv := server.New(cfg, mux)
 	log.Info("Before Server has started")
@@ -74,12 +73,9 @@ func main() {
 	log.Info("Server has started")
 }
 
-func loadRepository(c *config.Config) (vin.VinRepository, error) {
+func loadRepository(c *config.Config) (repo.ReviewRepository, error) {
 	if c.RepositoryType == "memory" {
 		return memory.New(), nil
-	}
-	if c.RepositoryType == "mariaDB" {
-		return mariadb.New(c), nil
 	}
 	return nil, fmt.Errorf("Unknown repository type repoType=%s", c.RepositoryType)
 }
