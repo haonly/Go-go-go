@@ -6,4 +6,7 @@ go 1.16
 //
 //)
 
-require github.com/jinzhu/configor v1.2.1 // indirect
+require (
+	 github.com/jinzhu/configor v1.2.1 // indirect
+	github.com/gorilla/mux v1.8.0
+)
