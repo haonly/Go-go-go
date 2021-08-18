@@ -95,6 +95,8 @@ RESPONSE HTTP 201 CREATED
 - 4xx: 클라이언트 에러
   - 400 Bad Request / 401 Unauthorized / 404 Not Found / ...
 - 5xx: 서버 오류
+  
+[mozilla 상태코드 참고 사이트](https://developer.mozilla.org/ko/docs/Web/HTTP/Status)
 
 #### HTTP 헤더
 - 표준에 맞추면 모두에게 도움이 된다!
